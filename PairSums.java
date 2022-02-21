@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class PairSums {
 
+
     /**
      * Given a list of n integers arr[0..(n-1)], determine the number of different
      * pairs of elements within it which sum to k.
@@ -20,12 +21,12 @@ public class PairSums {
     static int numberOfWays(int[] arr, int k) {
 
         // **** initialization ****
-        int pairs = 0;
-        HashMap<Integer, List<Integer>> valLoc = new HashMap<>();
-        List<Integer> locs = null;
+        int pairs                               = 0;
+        HashMap<Integer, List<Integer>> valLoc  = new HashMap<>();
+        List<Integer> locs                      = null;
 
         // **** populate hashmap of value : location O(n) ****
-        for (int i = 0; i < arr.length; i++) {
+        for (var i = 0; i < arr.length; i++) {
             
             // **** get locations for this value ****
             locs = valLoc.get(arr[i]);
@@ -42,13 +43,13 @@ public class PairSums {
         // System.out.println("numberOfWays <<< valLoc: " + valLoc.toString());
 
         // **** count pairs (pairs will be double counted) ****
-        for (int i = 0; i < arr.length; i++) {
+        for (var i = 0; i < arr.length; i++) {
+
+            // **** skip this value (if needed) ****
+            if (arr[i] > k) continue;
 
             // **** compute the needed value ****
-            int val = Math.abs(k - arr[i]);
-
-            // ???? ????
-            // System.out.println("numberOfWays <<< val: " + val);
+            var val = k - arr[i];
 
             // **** look up the value in the hashmap O(n) ****
             locs = valLoc.get(val);
@@ -58,8 +59,7 @@ public class PairSums {
                 pairs += locs.size();
 
                 // **** decrement count (a,a) ****
-                if (val == arr[i])
-                    pairs--;
+                if (val == arr[i]) pairs--;
 
                 // ???? ????
                 // System.out.println("numberOfWays <<< pairs: " + pairs);
@@ -81,8 +81,10 @@ public class PairSums {
         // **** open buffered reader ****
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        // **** read array of integers ****
-        String[] strArr = br.readLine().trim().split(",");
+        // **** read array of strings ****
+        String[] strArr = br.readLine()
+                            .trim()
+                            .split(",");
 
         // **** read k ****
         int k = Integer.parseInt(br.readLine().trim());
@@ -90,15 +92,17 @@ public class PairSums {
         // **** close buffered reder ****
         br.close();
 
-        // **** ****
-        int[] arr = Arrays.stream(strArr).mapToInt(Integer::parseInt).toArray();
+        // **** populate int[] arr ****
+        int[] arr = Arrays.stream(strArr)
+                            .map(x -> x.trim())
+                            .mapToInt(Integer::parseInt)
+                            .toArray();
         
         // ???? ????
-        System.out.println("main <<< arr: " + Arrays.toString(arr));
-        System.out.println("main <<<   k: " + k);
+        System.out.println("main <<<    arr: " + Arrays.toString(arr));
+        System.out.println("main <<<      k: " + k);
 
         // **** compute and display result ****
         System.out.println("main <<< output: " + numberOfWays(arr, k));
     }
-
 }
