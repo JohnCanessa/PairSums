@@ -10,7 +10,7 @@ If interested in my comments and approach please vesith the following post in my
 https://www.johncanessa.com/2021/01/06/pair-sums-in-java/
 
 Keep on reading and experimenting.
-It is th ebest way to learn.
+It is one of the best ways to learn.
 
 Enjoy;
 
